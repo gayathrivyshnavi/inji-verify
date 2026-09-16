@@ -59,7 +59,7 @@ CreateNewVerificationRequestWithX509SanDns:
   Injiverify_CreateNewVerificationRequestWithX509SanDns_InvalidUnderscore_Neg:
     endPoint: /v1/verify/v2/vp-request
     description: Submit x509_san_dns:foo_bar and expect HTTP 400 with errorCode invalid_request and an invalid DNS-name error message
-    uniqueIdentifier: TC_InjiVerify_X509SanDns_05
+    uniqueIdentifier: TC_InjiVerify_X509SanDns_04
     role: noauth
     restMethod: post
     inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequest
@@ -78,7 +78,7 @@ CreateNewVerificationRequestWithX509SanDns:
   Injiverify_CreateNewVerificationRequestWithX509SanDns_InvalidPort_Neg:
     endPoint: /v1/verify/v2/vp-request
     description: Submit x509_san_dns:example.com:443 and expect HTTP 400 with errorCode invalid_request because a port is not valid in a DNS name
-    uniqueIdentifier: TC_InjiVerify_X509SanDns_06
+    uniqueIdentifier: TC_InjiVerify_X509SanDns_05
     role: noauth
     restMethod: post
     inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequest
@@ -97,7 +97,7 @@ CreateNewVerificationRequestWithX509SanDns:
   Injiverify_CreateNewVerificationRequestWithX509SanDns_DoubleDot_Neg:
     endPoint: /v1/verify/v2/vp-request
     description: Submit x509_san_dns:example..com and expect HTTP 400 with errorCode invalid_request because a double dot is invalid DNS syntax
-    uniqueIdentifier: TC_InjiVerify_X509SanDns_07
+    uniqueIdentifier: TC_InjiVerify_X509SanDns_06
     role: noauth
     restMethod: post
     inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequest
@@ -116,7 +116,7 @@ CreateNewVerificationRequestWithX509SanDns:
   Injiverify_CreateNewVerificationRequestWithX509SanDns_EmptyDns_Neg:
     endPoint: /v1/verify/v2/vp-request
     description: Submit x509_san_dns without a DNS value and expect HTTP 400 with errorCode invalid_request and an invalid DNS-name error message
-    uniqueIdentifier: TC_InjiVerify_X509SanDns_08
+    uniqueIdentifier: TC_InjiVerify_X509SanDns_07
     role: noauth
     restMethod: post
     inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequest
@@ -135,7 +135,7 @@ CreateNewVerificationRequestWithX509SanDns:
   Injiverify_CreateNewVerificationRequestWithX509SanDns_HostMismatch_Neg:
     endPoint: /v1/verify/v2/vp-request
     description: Submit x509_san_dns:evil.example.com when the configured host is test.example.com and expect HTTP 400 with errorCode invalid_request and a host-mismatch error message
-    uniqueIdentifier: TC_InjiVerify_X509SanDns_09
+    uniqueIdentifier: TC_InjiVerify_X509SanDns_08
     role: noauth
     restMethod: post
     inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequest
