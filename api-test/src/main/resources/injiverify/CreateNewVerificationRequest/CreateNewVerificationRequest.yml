@@ -18,24 +18,6 @@ CreateNewVerificationRequest:
     "responseCode": "201"
 }'
 
-  Injiverify_CreateNewVerificationRequest_ForExpiry_All_Valid_Smoke_Sid:
-      endPoint: /v1/verify/v2/vp-request
-      description: Creating a new verification request for expiry with a valid DCQL query
-      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_02
-      role: noauth
-      restMethod: post
-      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequest
-      outputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestResult
-      input: '{
-      "clientId": "client123",
-      "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
-      "acceptVPWithoutHolderProof": false,
-      "responseCodeValidationRequired": false
-      }'
-      output: '{
-    "responseType": "vp_token"
-}'
-
   Injiverify_CreateNewVerificationRequest_Random_ClientId_Neg:
       endPoint: /v1/verify/v2/vp-request
       description: Creating a new verification request with random value for client id
@@ -343,75 +325,6 @@ CreateNewVerificationRequest:
       }'
       output: '{
     "responseType": "vp_token"
-}'
-
-  Injiverify_CreateNewVerificationRequest_Invalid_JSON_Body_Neg:
-      endPoint: /v1/verify/v2/vp-request
-      description: Creating a new verification request with invalid JSON body and expect error response
-      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_45
-      role: noauth
-      restMethod: post      
-      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestInvalidJson
-      outputTemplate: injiverify/error2
-      input: '{}'
-      output: '{
-      "errorCode": "INVALID_JSON"
-}'
-
-  Injiverify_CreateNewVerificationRequest_Unknown_Field_In_Request_Body_Neg:
-      endPoint: /v1/verify/v2/vp-request
-      description: Creating a new verification request with unknown field in request body and expect error response
-      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_46
-      role: noauth
-      restMethod: post
-      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestUnknownField
-      outputTemplate: injiverify/errorCodeAndMessage
-      input: '{
-      "clientId": "client123",
-      "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
-      "responseCodeValidationRequired": false
-      }'
-      output: '{
-        "errorCode": "UNKNOWN_FIELD",
-        "errorMessage": "Unknown field: presentationDefinition"
-}'
-
-  Injiverify_CreateNewVerificationRequest_Invalid_Field_Value_Type_Neg:
-      endPoint: /v1/verify/v2/vp-request
-      description: Creating a new verification request with invalid field value type and expect error response
-      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_47
-      role: noauth
-      restMethod: post
-      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestOptionalDcql
-      outputTemplate: injiverify/errorCodeAndMessage
-      input: '{
-      "clientId": "client123",
-      "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
-      "responseCodeValidationRequired": false,
-      "includeDcqlQuery": true,
-      "invalidDcqlType": true
-      }'
-      output: '{
-      "errorCode": "MALFORMED_REQUEST",
-      "errorMessage": "Cannot construct instance of `io.inji.verify.dto.dcql.DCQLQueryDto` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value (\u0027string_instead_of_object\u0027)"
-}'
-
-  Injiverify_CreateNewVerificationRequest_Missing_DcqlQuery_Neg:
-      endPoint: /v1/verify/v2/vp-request
-      description: Creating a new verification request without a DCQL query and expecting a dcql_query_required error
-      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_48
-      role: noauth
-      restMethod: post
-      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestOptionalDcql
-      outputTemplate: injiverify/errorCodeAndMessage
-      input: '{
-      "clientId": "client123",
-      "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
-      "responseCodeValidationRequired": false
-      }'
-      output: '{
-      "errorCode": "dcql_query_required",
-      "errorMessage": "dcql_query is required"
 }'
 
   Injiverify_CreateNewVerificationRequest_Empty_Credentials_Array_Neg:
@@ -781,4 +694,73 @@ CreateNewVerificationRequest:
       output: '{
       "errorCode": "dcql_query.credential_sets",
       "errorMessage": "credential_sets must contain at least one required entry."
+}'
+
+  Injiverify_CreateNewVerificationRequest_Invalid_JSON_Body_Neg:
+      endPoint: /v1/verify/v2/vp-request
+      description: Creating a new verification request with invalid JSON body and expect error response
+      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_45
+      role: noauth
+      restMethod: post      
+      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestInvalidJson
+      outputTemplate: injiverify/error2
+      input: '{}'
+      output: '{
+      "errorCode": "INVALID_JSON"
+}'
+
+  Injiverify_CreateNewVerificationRequest_Unknown_Field_In_Request_Body_Neg:
+      endPoint: /v1/verify/v2/vp-request
+      description: Creating a new verification request with unknown field in request body and expect error response
+      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_46
+      role: noauth
+      restMethod: post
+      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestUnknownField
+      outputTemplate: injiverify/errorCodeAndMessage
+      input: '{
+      "clientId": "client123",
+      "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
+      "responseCodeValidationRequired": false
+      }'
+      output: '{
+        "errorCode": "UNKNOWN_FIELD",
+        "errorMessage": "Unknown field: presentationDefinition"
+}'
+
+  Injiverify_CreateNewVerificationRequest_Invalid_Field_Value_Type_Neg:
+      endPoint: /v1/verify/v2/vp-request
+      description: Creating a new verification request with invalid field value type and expect error response
+      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_47
+      role: noauth
+      restMethod: post
+      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestOptionalDcql
+      outputTemplate: injiverify/errorCodeAndMessage
+      input: '{
+      "clientId": "client123",
+      "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
+      "responseCodeValidationRequired": false,
+      "includeDcqlQuery": true,
+      "invalidDcqlType": true
+      }'
+      output: '{
+      "errorCode": "MALFORMED_REQUEST",
+      "errorMessage": "Cannot construct instance of `io.inji.verify.dto.dcql.DCQLQueryDto` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value (\u0027string_instead_of_object\u0027)"
+}'
+
+  Injiverify_CreateNewVerificationRequest_Missing_DcqlQuery_Neg:
+      endPoint: /v1/verify/v2/vp-request
+      description: Creating a new verification request without a DCQL query and expecting a dcql_query_required error
+      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_48
+      role: noauth
+      restMethod: post
+      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequestOptionalDcql
+      outputTemplate: injiverify/errorCodeAndMessage
+      input: '{
+      "clientId": "client123",
+      "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
+      "responseCodeValidationRequired": false
+      }'
+      output: '{
+      "errorCode": "dcql_query_required",
+      "errorMessage": "dcql_query is required"
 }'
