@@ -782,3 +782,22 @@ CreateNewVerificationRequest:
       "errorCode": "dcql_query_all_credential_sets_optional",
       "errorMessage": "credential_sets must contain at least one required entry."
 }'
+
+  Injiverify_CreateVpRequest_ForWithoutPresentationId:
+      endPoint: /v1/verify/v2/vp-request
+      description: Creating a fresh VP request for testing submission without presentation ID
+      uniqueIdentifier: TC_InjiVerify_CreateNewVerificationRequest_49
+      role: noauth
+      checkOnlyStatusCodeInResponse: true
+      restMethod: post
+      inputTemplate: injiverify/CreateNewVerificationRequest/CreateNewVerificationRequest
+      outputTemplate: injiverify/responseCode
+      input: '{
+        "clientId": "decentralized_identifier:did:web:mosip.github.io:inji-mock-services:openid4vp-service:docs",
+        "nonce": "NkdHJkBIbdOdQaAjWm8gpA",
+		"acceptVPWithoutHolderProof": false,
+        "responseCodeValidationRequired": false
+      }'
+      output: '{
+        "responseCode": "201"
+}'
