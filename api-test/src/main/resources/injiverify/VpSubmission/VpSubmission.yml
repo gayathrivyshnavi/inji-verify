@@ -245,17 +245,18 @@ VpSubmission:
 }'
   Injiverify_VpSubmissionForSessionRequest_duplicateRequestID_All_Valid_Smoke:
       endPoint: /v1/verify/v2/vp-submission/direct-post
-      description: Submitting VC to VP Session Request with valid and already used requestID
+      description: Submitting VC to VP Session Request with already used requestID and expect duplicate submission error
       uniqueIdentifier: TC_InjiVerify_VpSubmission_14
       role: noauth
       restMethod: post
       inputTemplate: injiverify/VpSubmission/VpSubmission
-      outputTemplate: injiverify/error2
+      outputTemplate: injiverify/errorCodeAndMessage
       input: '{
       "state":"$ID:CreateNewVerificationRequest_ForVpSessionRequest_All_Valid_Smoke_Sid_requestId$"
       }'
       output: '{
-      "errorCode": "invalid_request"
+      "errorCode": "invalid_request",
+      "errorMessage": "VP response has already been submitted."
 }'
   Injiverify_VpSubmissionForSessionRequest_whenResponseCodeValidationIsFalse_All_Valid_Smoke:
       endPoint: /v1/verify/v2/vp-submission/direct-post
@@ -316,8 +317,6 @@ VpSubmission:
       }'
       output: '{
       "responseCode": "200"
-<<<<<<< HEAD
-=======
 }'
 
   Injiverify_VpSubmission_Unsupported_Param_Neg:

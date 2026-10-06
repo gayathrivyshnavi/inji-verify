@@ -9,7 +9,7 @@ import {
 import { raiseAlert } from "../redux/features/alerts/alerts.slice";
 import { useAppDispatch } from "../redux/hooks";
 import { QRCodeVerification } from "@injistack/react-inji-verify-sdk";
-import { getClientId, isVPSubmissionSupported, vcVerificationV2Request,} from "../utils/commonUtils";
+import { getClientId, getQrErrorMessage, isVPSubmissionSupported, vcVerificationV2Request,} from "../utils/commonUtils";
 import {checkInternetStatus} from "../utils/misc";
 import {updateInternetConnectionStatus} from "../redux/features/application-state/application-state.slice";
 
@@ -71,7 +71,14 @@ return (
                             document.getElementById("trigger-upload")?.click();
                             dispatch(
                                 raiseAlert({
-                                    message: error.message,
+                                        message:
+                                            error.name === "QR_DECODE_FAILED"
+                                                ? t("AlertMessages:qrDecodeFailed")
+                                                : error.name === "QR_NOT_FOUND"
+                                                    ? t("AlertMessages:qrNotDetected")
+                                                    : error.name === "MULTIPLE_QR_FOUND"
+                                                        ? t("AlertMessages:multipleQrFound")
+                                                        : getQrErrorMessage(error, t),
                                     severity: "error",
                                     open: true,
                                 })
